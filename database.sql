@@ -1,5 +1,5 @@
 CREATE DATABASE Devops;
-use devops
+use devops;
 CREATE TABLE birthday_data (
     id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50),
