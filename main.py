@@ -42,4 +42,39 @@ def schedule_notifications():
                 app_name='Birthday Reminder',
                 timeout=10,
             )
+# Main function to add a birthday
+def add_birthday():
+    month = int(input("Enter the month (1-12): "))
+    day = int(input("Enter the day (1-31): "))
+    name = input("Enter the name: ")
 
+    # Connect to the MySQL database
+    db_connection = mysql.connector.connect(**DB_CONFIG)
+    cursor = db_connection.cursor()
+
+    # Insert the birthday data into the table
+    insert_query = "INSERT INTO birthday_data (first_name, middle_name, last_name, year, month, day, sms) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+    cursor.execute(insert_query, (name, '', '', datetime.date.today().year, month, day, ''))
+
+    db_connection.commit()
+    db_connection.close()
+
+    birthdays = load_birthdays()
+    birthday_key = f'{month:02d} {day:02d}'
+    birthdays[birthday_key] = name
+
+    with open(BIRTHDAYS_FILE, 'w') as file:
+        json.dump(birthdays, file)
+
+    print("Birthday added successfully!")
+
+if _name_ == "_main_":
+    while True:
+        choice = input("Enter '1' to add a birthday or '2' to check for upcoming birthdays (q to quit): ")
+
+        if choice == '1':
+            add_birthday()
+        elif choice == '2':
+            schedule_notifications()
+        elif choice.lower() == 'q':
+            break
