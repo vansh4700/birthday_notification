@@ -8,5 +8,5 @@ CREATE TABLE birthday_data (
     year INT,
     month INT,
     day INT,
-    sms VARCHAR(1)
+    sms VARCHAR(10)
 );
