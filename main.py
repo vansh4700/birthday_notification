@@ -35,7 +35,7 @@ def schedule_notifications():
                 app_name='Birthday Reminder',
                 timeout=10,
             )
-# Main function to add a birthday
+# Main function to add birthday
 def add_birthday():
     month = int(input("Enter the month (1-12): "))
     day = int(input("Enter the day (1-31): "))
