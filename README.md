@@ -1,2 +1,1 @@
-# B_day_notification
-Team-17
+# B_day_notifications
